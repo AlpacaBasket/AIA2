@@ -2,13 +2,31 @@
 (defvar *facts*)
 (defvar *goals*)
 
-defn find-path [seeker target]
+;--------------
+; Goal Handling
+;--------------
+
+(defun is-fact (g)
+	; Check if goal is a fact
+	(eq 'fact (first g)))
+
+(defun is-rule (g)
+	; Check if goal is a rule
+	(eq 'rule (first g)))
+
+(defun print-goal-stack ()
+	(format t "~&goal stack....")
+	(pprint *goals*)
+	(format t "~&")
+	)
+
+defun find-path [seeker target]
 ()
 	
-defn move-around [person]
+defun move-around [person]
 ()
 
-defn avoid-hunter [prey predator]
+defun avoid-hunter [prey predator]
 ()
 
 ;------
