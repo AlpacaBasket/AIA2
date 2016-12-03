@@ -80,6 +80,12 @@ defn avoid-hunter [prey predator]
 ; Rules
 ;------
 
+(def example-operations
+     [(make-op 'someopp
+               #{'action}
+               #{'pre-cond}
+	       #{'post-cond}])
+
 (setf *rules*
       )
 
