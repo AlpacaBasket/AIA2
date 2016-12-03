@@ -6,27 +6,27 @@
 ; Goal Handling
 ;--------------
 
-(defun is-fact (g)
+(defn is-fact (g)
 	; Check if goal is a fact
 	(eq 'fact (first g)))
 
-(defun is-rule (g)
+(defn is-rule (g)
 	; Check if goal is a rule
 	(eq 'rule (first g)))
 
-(defun print-goal-stack ()
+(defn print-goal-stack ()
 	(format t "~&goal stack....")
 	(pprint *goals*)
 	(format t "~&")
 	)
 
-defun find-path [seeker target]
+defn find-path [seeker target]
 ()
 	
-defun move-around [person]
+defn move-around [person]
 ()
 
-defun avoid-hunter [prey predator]
+defn avoid-hunter [prey predator]
 ()
 
 ;------------
