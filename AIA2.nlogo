@@ -1,4 +1,9 @@
-globals [Assasin Target Reactive fWeapons Houses randomNum ]
+globals [fWeapons Houses randomNum ]
+breed [Weapon weapons]
+breed [Assassin Assassins]
+breed [Bystander Bystanders]
+breed [Guard Guards]
+breed [Target Targets]
 
  to setup
    clear-all
@@ -7,6 +12,7 @@ globals [Assasin Target Reactive fWeapons Houses randomNum ]
    setupAssasin
    setupTarget
    setupReactive
+   setupGuards ;;<---- Do this
    setupWeapon
    setupHouses
  end
@@ -17,11 +23,12 @@ globals [Assasin Target Reactive fWeapons Houses randomNum ]
  ;  startTarget
  ;  startReactive
  ;  startWeapon
+ ;  startGuards <--- Write this
  end
 
  ;; Code for initialising the Assasin agent
  to setupAssasin
-   create-turtles Assasin
+   create-Assassin 1
    [
      setxy random-xcor random-ycor
      set shape "person"
@@ -32,7 +39,7 @@ globals [Assasin Target Reactive fWeapons Houses randomNum ]
  ;; Code for initialising the target agent
  to setupTarget
 
-   create-turtles Target
+   create-Target 1
    [
      setxy random-xcor random-ycor
      set shape "person"
@@ -42,13 +49,17 @@ globals [Assasin Target Reactive fWeapons Houses randomNum ]
 
  ;; Code for initialising the reactive agents
  to setupReactive
-   create-turtles Reactive
-   ask Reactive
+   create-Bystander 1
+   ask Bystanders
    [
      setxy random-xcor random-ycor
      set shape "police person"
      set color blue
    ]
+ end
+
+ to setupGuards
+   ;; Do this mate
  end
 
  ;;Code for setting up weapon to use
