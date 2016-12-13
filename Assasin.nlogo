@@ -9,14 +9,13 @@ breed [House Houses]
  to setup
    clear-all
    reset-ticks
-
    ask patches [set pcolor 9]
-   setupAssasin
-   setupTarget
-   setupReactive
-   setupGuard
-   setupWeapon
-   setupHouse
+   ;setupAssasin
+   ;setupTarget
+   ;setupReactive
+   ;setupGuard
+   ;setupWeapon
+   ;setupHouse
  end
 
  to go
@@ -59,6 +58,13 @@ breed [House Houses]
      set shape "person"
      set color pink
      set size 1.5
+   ]
+ end
+
+ ;; Code for placing an object in a coordinate
+ to place [ agent xpos ypos ]
+   ask agent [
+     setxy ((xpos * 10) - 5) ((- (ypos * 10)) - 5)
    ]
  end
 
@@ -151,10 +157,10 @@ to startGuard
 GRAPHICS-WINDOW
 210
 10
-1247
-600
-39
-21
+1013
+834
+-1
+-1
 13.0
 1
 10
@@ -165,10 +171,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--39
-39
--21
-21
+0
+60
+0
+60
 0
 0
 1
