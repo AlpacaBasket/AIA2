@@ -1,1 +1,3 @@
-ergubfdcjioearpdfnjre
+I've updated the place method, it wasn't working properly earlier but now should (the program is a 6x6 grid going from 0,0 to 5,5
+
+Make a few netlogo files. Each of these can be a scenario with a different environment. From a programming perspective it's probably easier to have each agent be their own breed (i.e. guard1 is a breed, guard2 is a breed, etc)
