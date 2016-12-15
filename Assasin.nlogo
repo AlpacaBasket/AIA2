@@ -1,20 +1,21 @@
-globals [fWeapons Houses randomNum ]
+globals [fWeapons randomNum ]
 breed [Weapon weapons]
 breed [Assassin Assassins]
 breed [Bystander Bystanders]
 breed [Guard Guards]
 breed [Target Targets]
+breed [House Houses]
 
  to setup
    clear-all
    reset-ticks
    ask patches [set pcolor 9]
-   setupAssasin
-   setupTarget
-   setupReactive
-   setupGuards ;;<---- Do this
-   setupWeapon
-   setupHouses
+   ;setupAssasin
+   ;setupTarget
+   ;setupReactive
+   ;setupGuard
+   ;setupWeapon
+   ;setupHouse
  end
 
  to go
@@ -23,7 +24,7 @@ breed [Target Targets]
  ;  startTarget
  ;  startReactive
  ;  startWeapon
- ;  startGuards <--- Write this
+ ;  startGuards
  end
 
  ;; Code for initialising the Assasin agent
@@ -33,6 +34,7 @@ breed [Target Targets]
      setxy random-xcor random-ycor
      set shape "person"
      set color red
+     set size 1.5
    ]
  end
 
@@ -44,74 +46,99 @@ breed [Target Targets]
      setxy random-xcor random-ycor
      set shape "person"
      set color white
+     set size 1.5
    ]
  end
 
  ;; Code for initialising the reactive agents
  to setupReactive
-   create-Bystander 1
-   ask Bystanders
+   create-Bystander 10
    [
      setxy random-xcor random-ycor
-     set shape "police person"
-     set color blue
+     set shape "person"
+     set color pink
+     set size 1.5
    ]
  end
 
- to setupGuards
-   ;; Do this mate
+ ;; Code for placing an object in a coordinate
+ to place [ agent xpos ypos ]
+   ask agent [
+     setxy ((xpos * 10) + 5) ((- (ypos * 10)) + 5)
+   ]
+ end
+
+ ;; Code for initialising the Assasin agent
+ to setupGuard
+   create-Guard 20
+   [
+     setxy random-xcor random-ycor
+     set shape "person police"
+     set color blue
+     set size 1.5
+   ]
  end
 
  ;;Code for setting up weapon to use
  to setupWeapon
-   create-turtles  random (1 + random(4))
+   create-Weapon  random (1 + random(4))
    ask Weapon
    [
      setxy random-xcor random-ycor
      set shape "pushpin"
-     set color "orange"
+     set color orange
+     set size 1.5
    ]
  end
 
  ;;Code for setting up houses to be used as hiding spots
- to setupHouses
-   create-turtles 10
-   ask Houses
+ to setupHouse
+   create-House 10
     [
      setxy random-xcor random-ycor
      set shape "house"
-     set color "green"
+     set color green
+     set size 1.5
    ]
  end
 
- ;to startAssasin
- ;  [
- ;    move-turtles
- ;  ]
- ;end
- ;
- ;to startTarget
- ;  [
- ;    move-turtles
- ;  ]
- ;end
- ;
- ;to startReactive
- ;  [
- ;    move-turtles
- ;  ]
- ;end
-
-
-
-
- to move-turtles
+to move-turtles
    ask turtles
    [
      set heading (random 360)
      fd 1
    ]
  end
+
+ to startAssassin
+   ask Assassin
+   [
+     move-turtles fd 1
+   ]
+ end
+
+ to startTarget
+   ask Target
+   [
+     move-turtles fd 1
+   ]
+ end
+
+ to startBystander
+   ask Bystander
+   [
+     move-turtles fd 1
+   ]
+ end
+
+to startGuard
+   ask Guard
+   [
+     move-turtles fd 1
+   ]
+ end
+
+
 
  ;;; Agent context
  ;;; Move the agent calling this towards the target
@@ -130,10 +157,10 @@ breed [Target Targets]
 GRAPHICS-WINDOW
 210
 10
-649
-470
-16
-16
+1013
+834
+-1
+-1
 13.0
 1
 10
@@ -144,10 +171,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+0
+60
+0
+60
 0
 0
 1
@@ -212,7 +239,7 @@ house-num
 house-num
 1
 10
-1
+10
 1
 1
 NIL
@@ -450,6 +477,29 @@ Rectangle -7500403 true true 127 79 172 94
 Polygon -7500403 true true 195 90 240 150 225 180 165 105
 Polygon -7500403 true true 105 90 60 150 75 180 135 105
 
+person police
+false
+0
+Polygon -1 true false 124 91 150 165 178 91
+Polygon -13345367 true false 134 91 149 106 134 181 149 196 164 181 149 106 164 91
+Polygon -13345367 true false 180 195 120 195 90 285 105 300 135 300 150 225 165 300 195 300 210 285
+Polygon -13345367 true false 120 90 105 90 60 195 90 210 116 158 120 195 180 195 184 158 210 210 240 195 195 90 180 90 165 105 150 165 135 105 120 90
+Rectangle -7500403 true true 123 76 176 92
+Circle -7500403 true true 110 5 80
+Polygon -13345367 true false 150 26 110 41 97 29 137 -1 158 6 185 0 201 6 196 23 204 34 180 33
+Line -13345367 false 121 90 194 90
+Line -16777216 false 148 143 150 196
+Rectangle -16777216 true false 116 186 182 198
+Rectangle -16777216 true false 109 183 124 227
+Rectangle -16777216 true false 176 183 195 205
+Circle -1 true false 152 143 9
+Circle -1 true false 152 166 9
+Polygon -1184463 true false 172 112 191 112 185 133 179 133
+Polygon -1184463 true false 175 6 194 6 189 21 180 21
+Line -1184463 false 149 24 197 24
+Rectangle -16777216 true false 101 177 122 187
+Rectangle -16777216 true false 179 164 183 186
+
 plant
 false
 0
@@ -461,6 +511,16 @@ Polygon -7500403 true true 165 180 165 210 225 180 255 120 210 135
 Polygon -7500403 true true 135 105 90 60 45 45 75 105 135 135
 Polygon -7500403 true true 165 105 165 135 225 105 255 45 210 60
 Polygon -7500403 true true 135 90 120 45 150 15 180 45 165 90
+
+pushpin
+false
+0
+Polygon -7500403 true true 130 158 105 180 93 205 119 196 142 173
+Polygon -16777216 true false 121 112 111 128 109 143 112 158 123 175 138 184 156 189 169 188 186 177 199 158 139 98
+Circle -7500403 true true 126 86 90
+Polygon -16777216 true false 159 103 152 114 151 125 152 135 158 144 169 150 182 151 194 149 207 142 238 111 191 72
+Polygon -16777216 true false 187 56 177 72 175 87 178 102 189 119 204 128 222 133 235 132 252 121 265 102 205 42
+Circle -7500403 true true 190 30 90
 
 sheep
 false
