@@ -64,7 +64,7 @@ breed [House Houses]
  ;; Code for placing an object in a coordinate
  to place [ agent xpos ypos ]
    ask agent [
-     setxy ((xpos * 10) - 5) ((- (ypos * 10)) - 5)
+     setxy ((xpos * 10) + 5) ((- (ypos * 10)) + 5)
    ]
  end
 
