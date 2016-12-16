@@ -1,10 +1,11 @@
-globals [fWeapons randomNum ]
+globals [fWeapons randomNum activeAgent ]
 breed [Weapon weapons]
 breed [Assassin Assassins]
 breed [Bystander Bystanders]
 breed [Guard Guards]
 breed [Target Targets]
 breed [House Houses]
+turtles-own [xcoord ycoord]
 
  to setup
    clear-all
@@ -65,6 +66,17 @@ breed [House Houses]
  to place [ agent xpos ypos ]
    ask agent [
      setxy ((xpos * 10) + 5) ((- (ypos * 10)) + 5)
+   ]
+ end
+
+ ;; Code for getting an agent from a coordinate
+ ;; Sets "active agent" global variable to agent in the chosen coordinate
+ ;; activeAgent becomes nobody if space is empty
+ to getFromCoord [xpos ypos]
+   set activeAgent nobody
+   ask turtles [
+     if xcoord = xpos and ycoord = ypos
+       [ set activeAgent self ]
    ]
  end
 
@@ -137,8 +149,6 @@ to startGuard
      move-turtles fd 1
    ]
  end
-
-
 
  ;;; Agent context
  ;;; Move the agent calling this towards the target
