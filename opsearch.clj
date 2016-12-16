@@ -14,22 +14,26 @@
              }
 	kill	{:pre ( (agent ?agent)
 				    (at ?agent ?target)
-					(has ?agent weapon)
+					(has-weapon Assassin)
 					)
 			 :add ((is-dead target))
 			 :del ((is-living target))
 			 :txt (Assassin has killed target)
 			 }
-	})
+	
+	pick-wep {:pre ( (at Assassin ?p1)
+			 (at weapon ?p1)
+			 (no-weapon Assassin)
+			       )
+		  :add ((has-weapon Assassin))
+		  :del ((no-weapon Assassin))
+		  :txt (Assassin has picked up weapon)
+	)
 
 (def exampleState
-	'#{(at house 12)
-	   (at house 24)
-	   (at house 41)
-	   (at Assassin xx)
+	'#{(at Assassin xx)
 	   (at Target xx)
-	   (at police xx)
-	   (not-have weapon agent)
+	   (no-weapon Assassin)
 	   (is-living target)
 	   })
 
