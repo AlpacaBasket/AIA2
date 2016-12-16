@@ -44,7 +44,7 @@ turtles-own [xcoord ycoord]
  to setupAssasin
    create-Assassin 1
    [
-     place self 0 0
+     place self 1 3
      set shape "person business"
      set color black
      set size 1.5
@@ -55,7 +55,7 @@ turtles-own [xcoord ycoord]
  to setupTarget
    create-Target 1
    [
-     place self 5 5
+     place self 3 0
      set shape "person"
      set color red
      set size 1.5
@@ -66,7 +66,7 @@ turtles-own [xcoord ycoord]
  to setupGuard
    create-Guard 1
    [
-     place self 3 0
+     place self 4 1
      set shape "person police"
      set color blue
      set size 1.5
@@ -77,7 +77,7 @@ turtles-own [xcoord ycoord]
  to setupGuard1
    create-Guard1 1
    [
-      place self 5 4
+      place self 0 0
      set shape "person police"
      set color blue
      set size 1.5
@@ -88,7 +88,7 @@ turtles-own [xcoord ycoord]
  to setupGuard2
    create-Guard2 1
    [
-      place self 1 5
+      place self 3 3
      set shape "person police"
      set color blue
      set size 1.5
@@ -99,7 +99,7 @@ turtles-own [xcoord ycoord]
  to setupGuard3
    create-Guard3 1
    [
-      place self 0 3
+      place self 2 5
      set shape "person police"
      set color blue
      set size 1.5
@@ -110,7 +110,7 @@ turtles-own [xcoord ycoord]
  to setupWeapon
    create-Weapon 1
    [
-     place self 1 1
+     place self 5 4
      set shape "pushpin"
      set color orange
      set size 1.5
@@ -121,7 +121,7 @@ turtles-own [xcoord ycoord]
  to setupWeapon1
    create-Weapon1 1
    [
-     place self 0 5
+     place self 0 1
      set shape "pushpin"
      set color orange
      set size 1.5
@@ -132,7 +132,7 @@ turtles-own [xcoord ycoord]
  to setupWeapon2
    create-Weapon2 1
    [
-     place self 4 4
+     place self 4 2
      set shape "pushpin"
      set color orange
      set size 1.5
@@ -143,7 +143,7 @@ turtles-own [xcoord ycoord]
  to setupHouse
    create-House 1
     [
-     place self 5 1
+     place self 2 1
      set shape "house"
      set color green
      set size 1.5
@@ -154,7 +154,7 @@ turtles-own [xcoord ycoord]
  to setupHouse1
    create-House1 1
     [
-     place self 3 5
+     place self 5 2
      set shape "house"
      set color green
      set size 1.5
@@ -165,7 +165,7 @@ turtles-own [xcoord ycoord]
  to setupHouse2
    create-House2 1
     [
-     place self 2 2
+     place self 1 4
      set shape "house"
      set color green
      set size 1.5
