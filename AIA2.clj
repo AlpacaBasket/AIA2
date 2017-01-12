@@ -119,16 +119,15 @@
 ;    })
 ;
 ;
-;(def state1
-;  '#{(at R table)
-;     (on book table)
-;     (on spud table)
-;     (holds R nil)
-;     (connects table bench)
-;     (manipulable book)
-;     (manipulable spud)
-;     (agent R)
-;     })
+(def state1
+  '#{(holds A nil)
+     (on book table)
+     (on spud table)
+     (connects table bench)
+     (manipulable book)
+     (manipulable spud)
+     (agent A)
+     })
 ;
 ;
 ;user=> (ops-search state1 '((on book bench)) ops)
