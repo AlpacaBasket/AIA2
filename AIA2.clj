@@ -119,15 +119,15 @@
 ;    })
 ;
 ;
-(def state1
-  '#{(holds A nil)
-     (on book table)
-     (on spud table)
-     (connects table bench)
-     (manipulable book)
-     (manipulable spud)
-     (agent A)
-     })
+;(def state1
+; '#{(holds A nil)
+;     (on book table)
+;     (on spud table)
+;     (connects table bench)
+;     (manipulable book)
+;     (manipulable spud)
+;     (agent A)
+;     })
 ;
 ;
 ;user=> (ops-search state1 '((on book bench)) ops)
@@ -143,12 +143,27 @@
 ; :txt ((pickup book from table) (move table to bench) (drop book at bench))}
 ;
 ;
-;(def world
-;  '#{(connects table bench)
-;     (manipulable book)
-;     (manipulable spud)
-;     (agent R)
-;     })
+(def world
+  '#{(connects table bench)
+     (holds A nil)
+     (manipulable weapon0)
+     (manipulable weapon1)
+     (manipulable weapon2)
+     (at A 13)
+     (at T 30)
+     (at G0 41)
+     (at G1 00)
+     (at G2 33)
+     (at G3 25)
+     (at weapon0 54)
+     (at weapon1 01)
+     (at weapon2 42)
+     (at house0 21)
+     (at house1 52)
+     (at house2 14)
+     (agent A)
+     (agent T)
+     })
 ;
 ;(def state2
 ;  '#{(at R table)
