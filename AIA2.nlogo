@@ -8,6 +8,10 @@
 ;;;;;
 ;;;;;;; Set up the global variables, the breeds and the breed attributes
 ;;;;;
+;;;;; Main
+;;;;;
+;;;;;; Setup and Go
+;;;;;
 ;;;;; Placing Agents
 ;;;;;
 ;;;;;;; Place all of the agents in the environent
