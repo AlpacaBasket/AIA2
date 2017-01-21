@@ -1,4 +1,11 @@
+;;;;;;;;;;;;;;;;;;;;Extensions;;;;;;;;;;;;;;;;;;;;;;;;;
+
+extensions [ table sock2 ]
+
+;;;;;;;;;;;;;;;;;;;;Globals;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 globals [fWeapons randomNum activeAgent ]
+
 breed [Weapon]
 breed [Weapon1]
 breed [Weapon2]
@@ -11,8 +18,10 @@ breed [Target]
 breed [House]
 breed [House1]
 breed [House2]
+
 turtles-own [xcoord ycoord]
 
+;;;;;;;;;;;;;;;;;Main;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  to setup
    clear-all
    reset-ticks
@@ -40,7 +49,8 @@ turtles-own [xcoord ycoord]
  ;  startGuards
  end
 
- ;; Code for initialising the Assasin agent
+;;;;;;;;;;;;;;;;;;;;Placing Agents;;;;;;;;;;;;;;;;;;;;;
+
  to setupAssasin
    create-Assassin 1
    [
@@ -51,7 +61,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
- ;; Code for initialising the target agent
  to setupTarget
    create-Target 1
    [
@@ -62,7 +71,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-  ;; Code for initialising the Assasin agent
  to setupGuard
    create-Guard 1
    [
@@ -73,7 +81,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
- ;; Code for initialising the Assasin agent
  to setupGuard1
    create-Guard1 1
    [
@@ -84,7 +91,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-  ;; Code for initialising the Assasin agent
  to setupGuard2
    create-Guard2 1
    [
@@ -95,7 +101,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-   ;; Code for initialising the Guard agent
  to setupGuard3
    create-Guard3 1
    [
@@ -106,7 +111,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
- ;;Code for setting up weapon to use
  to setupWeapon
    create-Weapon 1
    [
@@ -117,7 +121,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-  ;;Code for setting up weapon to use
  to setupWeapon1
    create-Weapon1 1
    [
@@ -128,7 +131,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-  ;;Code for setting up weapon to use
  to setupWeapon2
    create-Weapon2 1
    [
@@ -139,7 +141,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
- ;;Code for setting up houses to be used as hiding spots
  to setupHouse
    create-House 1
     [
@@ -150,7 +151,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
- ;;Code for setting up houses to be used as hiding spots
  to setupHouse1
    create-House1 1
     [
@@ -161,7 +161,6 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-  ;;Code for setting up houses to be used as hiding spots
  to setupHouse2
    create-House2 1
     [
@@ -172,8 +171,7 @@ turtles-own [xcoord ycoord]
    ]
  end
 
-
-
+;;;;;;;;;;;;;;;;;;;;Utils;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
  ;; Code for placing an object in a coordinate
  to place [ agent xpos ypos ]
@@ -193,29 +191,21 @@ turtles-own [xcoord ycoord]
    ]
  end
 
+;;;;;;;;;;;;The Repl;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+to exec.repl
+  let cmd-str sock2:read
+  output-print (word "received: " cmd-str)
+  run cmd-str
+  tick
+end
 
-;to move-turtles
-;   ask turtles
-;   [
-;     set heading (random 360)
-;     fd 1
-;   ]
-; end
-;
-; ;; Agent context
-; ;; Move the agent calling this towards the target
-; to move-towards [target speed]
-;   face target
-;   fd speed
-; end
-;
-; ;; Agent context
-; ;; Move the agent calling this away from the target
-; to move-away [target speed]
-;   face target
-;   bk speed
-; end
+to flush-io
+  let cmd-str sock2:read
+  output-print (word "received: " cmd-str)
+  if (cmd-str = "stop") [stop]
+  tick
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -245,10 +235,10 @@ ticks
 30.0
 
 BUTTON
-75
-50
-138
-83
+98
+31
+161
+64
 NIL
 setup
 NIL
@@ -262,10 +252,10 @@ NIL
 1
 
 BUTTON
-77
-106
-140
-139
+99
+78
+162
+111
 NIL
 go\n
 NIL
@@ -322,6 +312,103 @@ weapon-num
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+1046
+69
+1147
+142
+port-num
+2222
+1
+0
+Number
+
+BUTTON
+1159
+69
+1234
+102
+connect
+print (word \"connecting on \" port-num)\nsock2:connect-local port-num\nprint \"socket connected\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1161
+112
+1233
+145
+NIL
+flush-io
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+1114
+217
+1505
+262
+command-stack
+cmd-sack
+17
+1
+11
+
+BUTTON
+99
+122
+162
+155
+start-repl
+exec.repl
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+OUTPUT
+1114
+273
+1504
+598
+11
+
+BUTTON
+1420
+279
+1483
+312
+clear
+clear-output
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
