@@ -1,3 +1,25 @@
+;;; Contents
+;;;;;
+;;;;; Extensions
+;;;;;
+;;;;;; The extensions
+;;;;;
+;;;;; Globals
+;;;;;
+;;;;;;; Set up the global variables, the breeds and the breed attributes
+;;;;;
+;;;;; Placing Agents
+;;;;;
+;;;;;;; Place all of the agents in the environent
+;;;;;
+;;;;; Utils
+;;;;;
+;;;;;;; Utilities: place and get from coordinate
+;;;;;
+;;;;; The Repl
+;;;;;
+;;;;;;; Clojure Repl Integration
+
 ;;;;;;;;;;;;;;;;;;;;Extensions;;;;;;;;;;;;;;;;;;;;;;;;;
 
 extensions [ table sock2 ]
@@ -284,10 +306,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-19
-230
-191
-263
+18
+218
+190
+251
 house-num
 house-num
 1
@@ -299,10 +321,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-20
-278
-192
-311
+18
+255
+190
+288
 weapon-num
 weapon-num
 1
