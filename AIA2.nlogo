@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Extensions
 ;;;;;
-;;;;;; The extensions
+;;;;;;; The extensions
 ;;;;;
 ;;;;; Globals
 ;;;;;
@@ -23,6 +23,14 @@
 ;;;;; The Repl
 ;;;;;
 ;;;;;;; Clojure Repl Integration
+;;;;;
+;;;;; CMD-STACK manipulation
+;;;;;
+;;;;;;; Manipulating the command stack
+;;;;;
+;;;;; Tests
+;;;;;
+;;;;;;; Tests for language interface
 
 ;;;;;;;;;;;;;;;;;;;;Extensions;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -30,7 +38,10 @@ extensions [ table sock2 ]
 
 ;;;;;;;;;;;;;;;;;;;;Globals;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-globals [fWeapons randomNum activeAgent ]
+globals [
+  fWeapons randomNum activeAgent
+  cmd-stack cmd-rules
+]
 
 breed [Weapon]
 breed [Weapon1]
@@ -52,6 +63,7 @@ turtles-own [xcoord ycoord]
    clear-all
    reset-ticks
    ask patches [set pcolor 9]
+   setupCMD
    setupAssasin
    setupTarget
    setupGuard
@@ -76,6 +88,23 @@ turtles-own [xcoord ycoord]
  end
 
 ;;;;;;;;;;;;;;;;;;;;Placing Agents;;;;;;;;;;;;;;;;;;;;;
+
+
+ to setupCMD
+
+   set cmd-stack ""
+
+    set cmd-rules table:from-list
+  (list
+    ;; expansions
+    ;;(list "X" (task [cmd-stack.push #expandR]) ) ;; Replace with appropriate task
+
+    ;;(list "x" (task [arm.cmd-right])  ) ;; Replace with appropriate task
+
+    ;; system controls
+
+  )
+ end
 
  to setupAssasin
    create-Assassin 1
@@ -232,6 +261,65 @@ to flush-io
   if (cmd-str = "stop") [stop]
   tick
 end
+
+;;;;;;;;;;;;CMD-STACK manipulation;;;;;;;;;;;;;;;;;;;;;
+
+to-report cmd-stack.pop
+  let #dat (first cmd-stack)
+  set cmd-stack (but-first cmd-stack)
+  report #dat
+end
+
+
+to cmd-stack.push [#dat]
+  set cmd-stack (word #dat cmd-stack)
+end
+
+
+to cmd-stack.queue [#dat]
+  set cmd-stack (word cmd-stack #dat)
+end
+
+
+to cmd-stack.run
+  while [not empty? cmd-stack]
+  [ cmd-stack.run1 ]
+end
+
+
+to cmd-stack.run1
+  let #m cmd-stack.pop
+  ; print (word #m " => " cmd-stack)
+  ifelse (table:has-key? cmd-rules #m)
+  [ run (table:get cmd-rules #m)  ]
+  [ ;; unknown command in use
+    print (word "unknown command: " #m)
+  ]
+  tick
+end
+
+
+to-report gen [#str #n]
+  ; print (list "gen:" #str #n)
+  set #n (int #n)
+  ifelse (#n = 0)
+  [ report "" ]
+  [ report reduce word n-values #n [#str] ]
+end
+
+;;;;;;;;;;;;Tests;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to test1
+  ;; do stuff
+end
+
+to test2
+  ;; do stuff
+end
+
+to test3
+  ;; do stuff
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -294,51 +382,6 @@ NIL
 NIL
 1
 
-SLIDER
-18
-181
-190
-214
-target-num
-target-num
-1
-20
-1
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-18
-218
-190
-251
-house-num
-house-num
-1
-10
-10
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-18
-255
-190
-288
-weapon-num
-weapon-num
-1
-4
-1
-1
-1
-NIL
-HORIZONTAL
-
 INPUTBOX
 1046
 69
@@ -389,8 +432,8 @@ MONITOR
 217
 1505
 262
-command-stack
-cmd-sack
+command stack
+cmd-stack
 17
 1
 11
@@ -426,6 +469,57 @@ BUTTON
 312
 clear
 clear-output
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1152
+176
+1218
+209
+Test 1
+test1
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1249
+176
+1315
+209
+Test 2
+test2
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1353
+176
+1419
+209
+Test 3
+test3
 NIL
 1
 T
